@@ -7,7 +7,8 @@ const API = "http://localhost:3000/sushis"
 
 class App extends Component {
   state = {
-    sushiOG: []
+    sushiOG: [],
+    renderFour: 0
   }
 
   componentDidMount() {
@@ -16,11 +17,18 @@ class App extends Component {
       .then(arr => this.setState({sushiOG: arr}))
   }
 
+  moreSushi = () => {
+    this.setState(prevState => ({renderFour: prevState.renderFour + 4}))
+  }
+
   render() {
-    console.log(this.state.sushiOG)
     return (
       <div className="app">
-        <SushiContainer sushis={this.state.sushiOG}/>
+        <SushiContainer 
+          sushis={this.state.sushiOG} 
+          renderFour={this.state.renderFour}
+          moreSushi={this.moreSushi}
+          />
         <Table />
       </div>
     );
